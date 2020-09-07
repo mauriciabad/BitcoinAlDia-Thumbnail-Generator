@@ -9,6 +9,7 @@ const imageElem = document.querySelector('#image');
 const textElem = document.querySelector('#text');
 const colorElem = document.querySelector('#color');
 const withColorElem = document.querySelector('#icon-with-color');
+const bgOffsetElem = document.querySelector('#bg-offset');
 const iconSunElem = document.querySelector('#icon-sun');
 const iconMoonElem = document.querySelector('#icon-moon');
 const thumbnailElem = document.querySelector('.thumbnail[data-selected="true"]');
@@ -81,7 +82,7 @@ downloadElem.addEventListener('click', async (event) => {
 
 imageElem.addEventListener('change', async (event) => {
   const url = await readFileURL(event.target.files[0]);
-  thumbnailElem.querySelector('.image').src = url;
+  thumbnailElem.style.backgroundImage = `url(${url})`;
 });
 
 dateElem.addEventListener('input', (event) => {
@@ -90,6 +91,11 @@ dateElem.addEventListener('input', (event) => {
     const dateStringHTML = dateString.replace(/([0/])(?=\d)/g, '<span class="translucent">$1</span>');
     thumbnailElem.querySelector('.date').innerHTML = dateStringHTML;
   }
+});
+
+bgOffsetElem.addEventListener('input', (event) => {
+  const offset = event.target.value;
+  thumbnailElem.style.setProperty('--bg-position-y', `${100 - offset}%`);
 });
 
 colorElem.addEventListener('input', (event) => {

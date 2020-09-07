@@ -18,17 +18,14 @@
 .thumbnail[data-theme="frame"] {
   --color-bg: #ffd866;
   --color-text: #000;
+  --bg-position-y: 50%;
 
   background-color: var(--color-bg, #ffd866);
   border: solid 40px var(--color-bg, #ffd866);
   position: relative;
-
-  .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    color: var(--color-text, #000);
-  }
+  background-image: url('../images/defaultBackground.jpg');
+  background-size: cover;
+  background-position: center var(--bg-position-y, 50%);
 
   .date {
     position: absolute;
