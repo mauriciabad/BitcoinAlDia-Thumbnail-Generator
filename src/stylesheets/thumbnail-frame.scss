@@ -54,14 +54,14 @@
     position: absolute;
     left: 0;
     top: 0;
-    
+
     & > img {
       display: none;
       width: 140px;
       height: 140px;
-
     }
-  } 
+  }
+
   .icon.monochrome > img {
     filter: brightness(0) #{"invert(var(--color-icon-filter, 0))"};
   }
