@@ -8,6 +8,7 @@ const dateElem = document.querySelector('#date');
 const imageElem = document.querySelector('#image');
 const textElem = document.querySelector('#text');
 const colorElem = document.querySelector('#color');
+const withColorElem = document.querySelector('#icon-with-color');
 const iconSunElem = document.querySelector('#icon-sun');
 const iconMoonElem = document.querySelector('#icon-moon');
 const thumbnailElem = document.querySelector('.thumbnail[data-selected="true"]');
@@ -60,6 +61,16 @@ function readFileURL(file) {
   });
 }
 
+function contrast(value) {
+  const hexCode = value.charAt(0) === '#' ? value.substr(1, 6) : value;
+
+  const red = parseInt(hexCode.substr(0, 2), 16);
+  const green = parseInt(hexCode.substr(2, 2), 16);
+  const blue = parseInt(hexCode.substr(4, 2), 16);
+  // Gets the average value of the colors
+  return (red * 0.299 + green * 0.587 + blue * 0.114) > 186;
+}
+
 downloadElem.addEventListener('click', async (event) => {
   event.preventDefault();
   const imgData = await generateImage();
@@ -81,27 +92,21 @@ dateElem.addEventListener('input', (event) => {
   }
 });
 
-function contrast(value) {
-  const hexCode = value.charAt(0) === '#' ? value.substr(1, 6) : value;
-
-  const red = parseInt(hexCode.substr(0, 2), 16);
-  const green = parseInt(hexCode.substr(2, 2), 16);
-  const blue = parseInt(hexCode.substr(4, 2), 16);
-  // Gets the average value of the colors
-  const isALightColor = (red * 0.299 + green * 0.587 + blue * 0.114) > 186;
-
-  return isALightColor ? 'black' : 'white';
-}
 colorElem.addEventListener('input', (event) => {
   const color = event.target.value;
-  const textColor = contrast(color);
+  const isALightColor = contrast(color);
 
   thumbnailElem.style.setProperty('--color-bg', color);
-  thumbnailElem.style.setProperty('--color-text', textColor);
+  thumbnailElem.style.setProperty('--color-text', isALightColor ? '#000' : '#fff');
+  thumbnailElem.style.setProperty('--color-icon-filter', isALightColor ? 0 : 1);
 });
 
 textElem.addEventListener('input', (event) => {
   thumbnailElem.querySelector('.text').textContent = event.target.value;
+});
+
+withColorElem.addEventListener('change', (event) => {
+  thumbnailElem.querySelector('.icon').classList.toggle('monochrome', !event.target.checked);
 });
 
 document.querySelectorAll('input[name="icon"]').forEach((input) => {
