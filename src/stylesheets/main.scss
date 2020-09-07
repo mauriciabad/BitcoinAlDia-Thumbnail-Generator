@@ -37,11 +37,7 @@ h2 {
   }
 
   &__preview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-    padding: 1rem;
+    overflow: auto;    
   }
 }
 
@@ -49,6 +45,7 @@ h2 {
   width: 1280px;
   height: 720px;
   box-sizing: border-box;
+  margin: calc((100vh - 720px - 17px) / 2) auto;
 }
 
 #download {
