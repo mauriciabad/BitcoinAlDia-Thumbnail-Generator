@@ -10,6 +10,7 @@ const textElem = document.querySelector('#text');
 const colorElem = document.querySelector('#color');
 const withColorElem = document.querySelector('#icon-with-color');
 const bgOffsetElem = document.querySelector('#bg-offset');
+const textSizeElem = document.querySelector('#text-size');
 const iconSunElem = document.querySelector('#icon-sun');
 const iconMoonElem = document.querySelector('#icon-moon');
 const thumbnailElem = document.querySelector('.thumbnail[data-selected="true"]');
@@ -96,6 +97,11 @@ dateElem.addEventListener('input', (event) => {
 bgOffsetElem.addEventListener('input', (event) => {
   const offset = event.target.value;
   thumbnailElem.style.setProperty('--bg-position-y', `${100 - offset}%`);
+});
+
+textSizeElem.addEventListener('input', (event) => {
+  const size = event.target.value;
+  thumbnailElem.style.setProperty('--text-size', `${size}px`);
 });
 
 colorElem.addEventListener('input', (event) => {

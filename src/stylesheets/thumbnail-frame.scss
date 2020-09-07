@@ -19,6 +19,7 @@
   --color-bg: #ffd866;
   --color-text: #000;
   --bg-position-y: 50%;
+  --text-size: 120px;
 
   background-color: var(--color-bg, #ffd866);
   border: solid 40px var(--color-bg, #ffd866);
@@ -26,6 +27,7 @@
   background-image: url('../images/defaultBackground.jpg');
   background-size: cover;
   background-position: center var(--bg-position-y, 50%);
+  overflow: hidden;
 
   .date {
     position: absolute;
@@ -39,6 +41,7 @@
     padding: 0 0 40px 40px;
     letter-spacing: 0.15em;
     margin-right: -0.15em;
+    z-index: 1;
 
     & > .translucent {
       opacity: 0.33;
@@ -51,6 +54,7 @@
     position: absolute;
     left: 0;
     top: 0;
+    z-index: 1;
 
     &__img {
       display: none;
@@ -80,7 +84,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    font-size: 120px;
+    font-size: var(--text-size, 120px);
     color: #fff;
     text-align: center;
     font-weight: bold;
