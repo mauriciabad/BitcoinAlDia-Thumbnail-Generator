@@ -3,6 +3,11 @@ import 'babel-polyfill';
 import html2canvas from 'html2canvas';
 // import templates from '../data/templates';
 
+const downloadElem = document.querySelector('#download');
+const dateElem = document.querySelector('#date');
+const iconSunElem = document.querySelector('#icon-sun');
+const iconMoonElem = document.querySelector('#icon-moon');
+
 function download(filename, data) {
   const element = document.createElement('a');
 
@@ -17,10 +22,32 @@ function download(filename, data) {
   document.body.removeChild(element);
 }
 
-html2canvas(document.querySelector('#thumbnail')).then((canvas) => {
-  const imageData = canvas.toDataURL('image/png');
+async function generateImage() {
+  const canvas = await html2canvas(document.querySelector('#thumbnail'));
 
-  const imgData = imageData.replace(/^data:image\/png/, 'data:application/octet-stream');
+  return canvas
+    .toDataURL('image/png')
+    .replace(/^data:image\/png/, 'data:application/octet-stream');
+}
 
-  download(`filename-${1}.png`, imgData);
+function fillControls() {
+  const now = new Date();
+  const todayDate = new Date();
+  todayDate.setHours(todayDate.getHours() - 5);
+
+  dateElem.value = todayDate.toISOString().substr(0, 10);
+
+  if (now.getHours() < 19) {
+    iconSunElem.checked = true;
+  } else {
+    iconMoonElem.checked = true;
+  }
+}
+
+downloadElem.addEventListener('click', async () => {
+  const imgData = await generateImage();
+  const dateString = dateElem.value.replace('/', '-');
+  download(`miniatura-${dateString}.png`, imgData);
 });
+
+fillControls();

@@ -6,28 +6,43 @@
     <meta name="description" content="Generador de miniaturas para el canal de YouTube Bitcoin al dia">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   </head>
-<body>
+<body class="grid">
+  <div class="grid__controls">
+    <h2>Parámetros</h2>
+    <ul class="controls">
+      <li class="control">
+        <label class="control__label" for="date">Fecha</label>
+        <input class="control__input" type="date" name="date" id="date">
+      </li>
+      <li class="control">
+        <label class="control__label" for="image">Imagen</label>
+        <input class="control__input" type="file" name="image" id="image">
+      </li>
+      <li class="control">
+        <label class="control__label" for="text">Texto</label>
+        <input class="control__input" type="text" name="text" id="text">
+      </li>
+      <li class="control">
+        <span class="control__label">Icono</span>
 
-  <ul>
-    <li>
-      <label for="date">Fecha</label>
-      <input type="date" name="date" id="date">
-    </li>
-    <li>
-      <label for="image">Imagen</label>
-      <input type="file" name="image" id="image">
-    </li>
-    <li>
-      <label for="text">Texto</label>
-      <input type="text" name="text" id="text">
-    </li>
-    <li>
-      <label for="icon-sun">Sol</label>
-      <input type="radio" name="icon" id="icon-sun">
+        <div class="control__radio">
+          <div>
+            <input type="radio" name="icon" id="icon-sun">
+            <label for="icon-sun">Sol</label>
+          </div>
+          <div>
+            <input type="radio" name="icon" id="icon-moon">
+            <label for="icon-moon">Luna</label>
+          </div>
+        </div>
+      </li>
+    </ul>
 
-      <label for="icon-moon">Luna</label>
-      <input type="radio" name="icon" id="icon-moon">
-    </li>
-  </ul>
+    <a href="" download="miniatura.png" id="download">Descargar</a>
+  </div>
+
+  <div class="grid__preview">
+    <div id="thumbnail"></div>
+  </div>
 </body>
 </html>
