@@ -8,21 +8,22 @@
   </head>
 <body class="grid">
   <div class="grid__controls">
-    <h2>Parámetros</h2>
-    <ul class="controls">
-      <li class="control">
+    <div class="controls">
+      <h2>Parámetros</h2>
+      
+      <div class="control">
         <label class="control__label" for="date">Fecha</label>
         <input class="control__input" type="date" name="date" id="date" autocomplete="off">
-      </li>
-      <li class="control">
+      </div>
+      <div class="control">
         <label class="control__label" for="image">Imagen</label>
         <input class="control__input" type="file" name="image" id="image" accept="image/*" style="cursor: pointer;">
-      </li>
-      <li class="control">
+      </div>
+      <div class="control">
         <label class="control__label" for="text">Texto</label>
         <textarea class="control__input" type="text" name="text" id="text" autocomplete="off" rows="3" style="resize: vertical;"></textarea>
-      </li>
-      <li class="control">
+      </div>
+      <div class="control">
         <span class="control__label">Icono</span>
 
         <div class="control__radio">
@@ -50,20 +51,20 @@
             <label for="icon-with-color" style="cursor: pointer;">Con color</label>
           </div>
         </div>
-      </li>
-      <li class="control">
+      </div>
+      <div class="control">
         <label class="control__label" for="color">Color</label>
         <input class="control__input" type="color" name="color" id="color" value="#ffd866">
-      </li>
-      <li class="control">
+      </div>
+      <div class="control">
         <label class="control__label" for="text-size">Tamaño del texto</label>
         <input class="control__input" type="range" name="text-size" id="text-size" min="55" max ="140" value="120" style="box-shadow: none;">
-      </li>
-      <li class="control">
+      </div>
+      <div class="control">
         <label class="control__label" for="bg-offset">Posición del fondo</label>
         <input class="control__input" type="range" name="bg-offset" id="bg-offset" min="0" max ="100" value="50" style="box-shadow: none;">
-      </li>
-    </ul>
+      </div>
+    </div>
 
     <a href="" download="miniatura.png" id="download">Descargar</a>
   </div>
