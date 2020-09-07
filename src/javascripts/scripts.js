@@ -50,6 +50,15 @@ function fillControls() {
   }
 }
 
+function readFileURL(file) {
+  return new Promise((res, rej) => {
+    const reader = new FileReader();
+    reader.onload = (e) => res(e.target.result);
+    reader.onerror = (e) => rej(e);
+    reader.readAsDataURL(file);
+  });
+}
+
 downloadElem.addEventListener('click', async (event) => {
   event.preventDefault();
   const imgData = await generateImage();
@@ -59,8 +68,9 @@ downloadElem.addEventListener('click', async (event) => {
   download(`miniatura-${dateString}-${iconTranslated}.png`, imgData);
 });
 
-imageElem.addEventListener('change', (event) => {
-  thumbnailElem.querySelector('.image').src = URL.createObjectURL(event.target.files[0]);
+imageElem.addEventListener('change', async (event) => {
+  const url = await readFileURL(event.target.files[0]);
+  thumbnailElem.querySelector('.image').src = url;
 });
 
 dateElem.addEventListener('input', (event) => {
