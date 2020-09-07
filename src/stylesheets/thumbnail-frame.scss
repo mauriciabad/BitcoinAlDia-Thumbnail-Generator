@@ -1,3 +1,20 @@
+/// Stroke font-character
+/// @param  {Integer} $stroke - Stroke width
+/// @param  {Color}   $color  - Stroke color
+/// @return {List}            - text-shadow list
+@function stroke($stroke, $color) {
+  $shadow: ();
+  $from: $stroke * -1;
+
+  @for $i from $from through $stroke {
+    @for $j from $from through $stroke {
+      $shadow: append($shadow, $i $j 0 $color, comma);
+    }
+  }
+
+  @return $shadow;
+}
+
 .thumbnail[data-theme="frame"] {
   $accentColor: #ffd866;
 
@@ -42,5 +59,19 @@
   .icon[data-icon="sun"] > img[data-icon="sun"],
   .icon[data-icon="moon"] > img[data-icon="moon"] {
     display: inline-block;
+  }
+
+  .text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 120px;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 20px;
+    text-shadow: stroke(10px, #000);
   }
 }

@@ -6,6 +6,7 @@ import html2canvas from 'html2canvas';
 const downloadElem = document.querySelector('#download');
 const dateElem = document.querySelector('#date');
 const imageElem = document.querySelector('#image');
+const textElem = document.querySelector('#text');
 const iconSunElem = document.querySelector('#icon-sun');
 const iconMoonElem = document.querySelector('#icon-moon');
 const thumbnailElem = document.querySelector('.thumbnail[data-selected="true"]');
@@ -66,6 +67,10 @@ dateElem.addEventListener('input', (event) => {
     const dateStringHTML = dateString.replace(/([0/])(?=\d)/g, '<span class="translucent">$1</span>');
     thumbnailElem.querySelector('.date').innerHTML = dateStringHTML;
   }
+});
+
+textElem.addEventListener('input', (event) => {
+  thumbnailElem.querySelector('.text').textContent = event.target.value;
 });
 
 document.querySelectorAll('input[name="icon"]').forEach((input) => {
