@@ -7,6 +7,7 @@ const downloadElem = document.querySelector('#download');
 const dateElem = document.querySelector('#date');
 const imageElem = document.querySelector('#image');
 const textElem = document.querySelector('#text');
+const colorElem = document.querySelector('#color');
 const iconSunElem = document.querySelector('#icon-sun');
 const iconMoonElem = document.querySelector('#icon-moon');
 const thumbnailElem = document.querySelector('.thumbnail[data-selected="true"]');
@@ -64,8 +65,7 @@ downloadElem.addEventListener('click', async (event) => {
   const imgData = await generateImage();
   const dateString = dateElem.value.replace(/\d{2}(\d{2})-(\d{2})-(\d{2})/, '$1-$2-$3');
   const iconString = document.querySelector('input[name="icon"]:checked').dataset.icon;
-  const iconTranslated = iconString === 'sun' ? 'dia' : 'noche';
-  download(`miniatura-${dateString}-${iconTranslated}.png`, imgData);
+  download(`miniatura-${dateString}-${iconString}.png`, imgData);
 });
 
 imageElem.addEventListener('change', async (event) => {
@@ -79,6 +79,10 @@ dateElem.addEventListener('input', (event) => {
     const dateStringHTML = dateString.replace(/([0/])(?=\d)/g, '<span class="translucent">$1</span>');
     thumbnailElem.querySelector('.date').innerHTML = dateStringHTML;
   }
+});
+
+colorElem.addEventListener('input', (event) => {
+  thumbnailElem.style.setProperty('--color', event.target.value);
 });
 
 textElem.addEventListener('input', (event) => {

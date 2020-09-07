@@ -16,9 +16,9 @@
 }
 
 .thumbnail[data-theme="frame"] {
-  $accentColor: #ffd866;
+  --color: #ffd866;
 
-  border: solid 40px $accentColor;
+  border: solid 40px var(--color, #ffd866);
   position: relative;
 
   .image {
@@ -31,7 +31,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    background-color: $accentColor;
+    background-color: var(--color, #ffd866);
     color: #000;
     font-weight: bold;
     font-size: 120px * 1 / 0.8;
@@ -52,10 +52,12 @@
     top: 0;
     width: 140px;
     height: 140px;
-    background-color: $accentColor;
+    background-color: var(--color, #ffd866);
     padding: 0 20px 20px 0;
   }
 
+  .icon[data-icon="alert"] > img[data-icon="alert"],
+  .icon[data-icon="info"] > img[data-icon="info"],
   .icon[data-icon="sun"] > img[data-icon="sun"],
   .icon[data-icon="moon"] > img[data-icon="moon"] {
     display: inline-block;
