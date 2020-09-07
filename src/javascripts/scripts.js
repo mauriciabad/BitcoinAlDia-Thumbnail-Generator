@@ -98,7 +98,6 @@ colorElem.addEventListener('input', (event) => {
 
   thumbnailElem.style.setProperty('--color-bg', color);
   thumbnailElem.style.setProperty('--color-text', isALightColor ? '#000' : '#fff');
-  thumbnailElem.style.setProperty('--color-icon-filter', isALightColor ? 0 : 1);
 });
 
 textElem.addEventListener('input', (event) => {
