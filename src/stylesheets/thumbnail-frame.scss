@@ -19,7 +19,7 @@
   --color-bg: #ffd866;
   --color-text: #000;
   --bg-position-y: 50%;
-  --text-size: 120px;
+  --text-size: 100px;
 
   background-color: var(--color-bg, #ffd866);
   border: solid 40px var(--color-bg, #ffd866);
@@ -84,7 +84,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    font-size: var(--text-size, 120px);
+    font-size: var(--text-size, 100px);
     color: #fff;
     text-align: center;
     font-weight: bold;
