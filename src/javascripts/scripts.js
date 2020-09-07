@@ -81,8 +81,23 @@ dateElem.addEventListener('input', (event) => {
   }
 });
 
+function contrast(value) {
+  const hexCode = value.charAt(0) === '#' ? value.substr(1, 6) : value;
+
+  const red = parseInt(hexCode.substr(0, 2), 16);
+  const green = parseInt(hexCode.substr(2, 2), 16);
+  const blue = parseInt(hexCode.substr(4, 2), 16);
+  // Gets the average value of the colors
+  const isALightColor = (red * 0.299 + green * 0.587 + blue * 0.114) > 186;
+
+  return isALightColor ? 'black' : 'white';
+}
 colorElem.addEventListener('input', (event) => {
-  thumbnailElem.style.setProperty('--color', event.target.value);
+  const color = event.target.value;
+  const textColor = contrast(color);
+
+  thumbnailElem.style.setProperty('--color-bg', color);
+  thumbnailElem.style.setProperty('--color-text', textColor);
 });
 
 textElem.addEventListener('input', (event) => {
