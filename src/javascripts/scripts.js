@@ -25,7 +25,7 @@ function download(filename, data) {
 }
 
 async function generateImage() {
-  const canvas = await html2canvas(document.querySelector('#thumbnail'));
+  const canvas = await html2canvas(thumbnailElem);
 
   return canvas
     .toDataURL('image/png')
@@ -47,10 +47,13 @@ function fillControls() {
   }
 }
 
-downloadElem.addEventListener('click', async () => {
+downloadElem.addEventListener('click', async (event) => {
+  event.preventDefault();
   const imgData = await generateImage();
-  const dateString = dateElem.value.replace('/', '-');
-  download(`miniatura-${dateString}.png`, imgData);
+  const dateString = dateElem.value.replace(/\d{2}(\d{2})-(\d{2})-(\d{2})/, '$1-$2-$3');
+  const iconString = document.querySelector('input[name="icon"]:checked').dataset.icon;
+  const iconTranslated = iconString === 'sun' ? 'dia' : 'noche';
+  download(`miniatura-${dateString}-${iconTranslated}.png`, imgData);
 });
 
 imageElem.addEventListener('change', (event) => {
