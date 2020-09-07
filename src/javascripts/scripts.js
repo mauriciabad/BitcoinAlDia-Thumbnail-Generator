@@ -5,8 +5,10 @@ import html2canvas from 'html2canvas';
 
 const downloadElem = document.querySelector('#download');
 const dateElem = document.querySelector('#date');
+const imageElem = document.querySelector('#image');
 const iconSunElem = document.querySelector('#icon-sun');
 const iconMoonElem = document.querySelector('#icon-moon');
+const thumbnailElem = document.querySelector('.thumbnail[data-selected="true"]');
 
 function download(filename, data) {
   const element = document.createElement('a');
@@ -36,6 +38,7 @@ function fillControls() {
   todayDate.setHours(todayDate.getHours() - 5);
 
   dateElem.value = todayDate.toISOString().substr(0, 10);
+  dateElem.dispatchEvent(new Event('input'));
 
   if (now.getHours() < 19) {
     iconSunElem.checked = true;
@@ -48,6 +51,25 @@ downloadElem.addEventListener('click', async () => {
   const imgData = await generateImage();
   const dateString = dateElem.value.replace('/', '-');
   download(`miniatura-${dateString}.png`, imgData);
+});
+
+imageElem.addEventListener('change', (event) => {
+  thumbnailElem.querySelector('.image').src = URL.createObjectURL(event.target.files[0]);
+});
+
+dateElem.addEventListener('input', (event) => {
+  if (event.target.value) {
+    const dateString = event.target.value.replace(/\d{2}(\d{2})-(\d{2})-(\d{2})/, '$3/$2/$1');
+    const dateStringHTML = dateString.replace(/([0/])(?=\d)/g, '<span class="translucent">$1</span>');
+    thumbnailElem.querySelector('.date').innerHTML = dateStringHTML;
+  }
+});
+
+document.querySelectorAll('input[name="icon"]').forEach((input) => {
+  input.addEventListener('change', (event) => {
+    const selectedIcon = event.target.dataset.icon;
+    thumbnailElem.querySelector('.icon').dataset.icon = selectedIcon;
+  });
 });
 
 fillControls();

@@ -27,11 +27,11 @@
 
         <div class="control__radio">
           <div>
-            <input type="radio" name="icon" id="icon-sun" style="cursor: pointer;">
+            <input type="radio" name="icon" id="icon-sun" data-icon="sun" style="cursor: pointer;">
             <label for="icon-sun" style="cursor: pointer;">Sol</label>
           </div>
           <div>
-            <input type="radio" name="icon" id="icon-moon" style="cursor: pointer;">
+            <input type="radio" name="icon" id="icon-moon" data-icon="moon" style="cursor: pointer;">
             <label for="icon-moon" style="cursor: pointer;">Luna</label>
           </div>
         </div>
@@ -42,7 +42,14 @@
   </div>
 
   <div class="grid__preview">
-    <div id="thumbnail"></div>
+    <div class="thumbnail" data-theme="frame" data-selected="true">
+      <img class="image" src="./images/defaultBackground.png" alt="">
+      <div class="icon" data-icon="sun">
+        <img src="./images/icon-sun.svg" data-icon="sun" alt="">
+        <img src="./images/icon-moon.svg" data-icon="moon" alt="">
+      </div>
+      <span class="date"></span>
+    </div>
   </div>
 </body>
 </html>
