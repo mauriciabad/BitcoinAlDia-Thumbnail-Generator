@@ -113,7 +113,7 @@ colorElem.addEventListener('input', (event) => {
 });
 
 textElem.addEventListener('input', (event) => {
-  thumbnailElem.querySelector('.text').textContent = event.target.value;
+  thumbnailElem.querySelector('.text').innerHTML = event.target.value.replaceAll('\n', '<br>');
 });
 
 withColorElem.addEventListener('change', (event) => {
