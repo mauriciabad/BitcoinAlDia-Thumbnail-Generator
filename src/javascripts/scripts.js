@@ -43,8 +43,10 @@ function fillControls() {
 
   if (now.getHours() < 19) {
     iconSunElem.checked = true;
+    thumbnailElem.querySelector('.icon').dataset.icon = 'sun';
   } else {
     iconMoonElem.checked = true;
+    thumbnailElem.querySelector('.icon').dataset.icon = 'moon';
   }
 }
 
