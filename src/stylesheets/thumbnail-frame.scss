@@ -67,6 +67,10 @@
     &.monochrome > .icon__img {
       color: var(--color-text, #000) !important;
     }
+
+    &.hidden {
+      display: none !important;
+    }
   }
 
   .icon__img[data-icon="alert"] { color: #000; }

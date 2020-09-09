@@ -9,6 +9,8 @@ const imageElem = document.querySelector('#image');
 const textElem = document.querySelector('#text');
 const colorElem = document.querySelector('#color');
 const withColorElem = document.querySelector('#icon-with-color');
+const iconEnableElem = document.querySelector('#icon-enable');
+const iconControlsElem = document.querySelector('#icon-controls');
 const bgOffsetElem = document.querySelector('#bg-offset');
 const textSizeElem = document.querySelector('#text-size');
 const iconSunElem = document.querySelector('#icon-sun');
@@ -121,6 +123,18 @@ textElem.addEventListener('input', (event) => {
 
 withColorElem.addEventListener('change', (event) => {
   thumbnailElem.querySelector('.icon').classList.toggle('monochrome', !event.target.checked);
+});
+
+iconEnableElem.addEventListener('change', (event) => {
+  const isEnabled = event.target.checked;
+  console.log(isEnabled);
+
+  iconControlsElem.querySelectorAll('input:not(#icon-enable)').forEach((input) => {
+    // eslint-disable-next-line no-param-reassign
+    input.disabled = !isEnabled;
+  });
+
+  thumbnailElem.querySelector('.icon').classList.toggle('hidden', !isEnabled);
 });
 
 document.querySelectorAll('input[name="icon"]').forEach((input) => {
