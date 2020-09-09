@@ -52,6 +52,9 @@ function fillControls() {
     iconMoonElem.checked = true;
     thumbnailElem.querySelector('.icon').dataset.icon = 'moon';
   }
+
+  textSizeElem.value = 100;
+  bgOffsetElem.value = 50;
 }
 
 function readFileURL(file) {
