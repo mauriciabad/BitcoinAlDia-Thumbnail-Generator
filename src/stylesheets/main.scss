@@ -3,11 +3,14 @@
   --color-primary: cornflowerblue;
 }
 
+$min-body-width: 44rem;
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   height: 100vh;
   background: #151515;
   color: #fff;
+  min-width: $min-body-width;
 }
 
 svg,
@@ -33,8 +36,10 @@ h2 {
     height: 100vh;
   }
 
-  &__preview {
-    overflow: auto;
+  @media screen and (min-width: $min-body-width) {
+    &__preview {
+      overflow: auto;
+    }
   }
 }
 
