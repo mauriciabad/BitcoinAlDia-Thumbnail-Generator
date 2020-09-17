@@ -3,14 +3,12 @@
   --color-primary: cornflowerblue;
 }
 
-$min-body-width: 44rem;
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   height: 100vh;
   background: #151515;
   color: #fff;
-  min-width: $min-body-width;
 }
 
 svg,
@@ -36,18 +34,26 @@ h2 {
     height: 100vh;
   }
 
-  @media screen and (min-width: $min-body-width) {
-    &__preview {
-      overflow: auto;
-    }
+  &__preview {
+    position: relative;
+    min-width: 1280px * 0.1;
+    min-height: 720px * 0.1;
   }
 }
 
 .thumbnail {
+  transform: translate(-50%, -50%) scale(1);
+  position: absolute;
+  inset: 50% unset unset 50%;
   width: 1280px;
   height: 720px;
   box-sizing: border-box;
-  margin: calc((100vh - 720px - 17px) / 2) auto;
+
+  @for $i from 10 through 2 {
+    @media screen and (max-width: 384px + 1280px * $i/10) {
+      transform: translate(-50%, -50%) scale(($i - 1)/10);
+    }
+  }
 }
 
 #download {

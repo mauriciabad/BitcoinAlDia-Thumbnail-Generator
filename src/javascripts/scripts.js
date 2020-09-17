@@ -32,7 +32,11 @@ function download(filename, data) {
 }
 
 async function generateImage() {
-  const canvas = await html2canvas(thumbnailElem);
+  const canvas = await html2canvas(thumbnailElem, {
+    allowTaint: true,
+    useCORS: true,
+    scale: 1 / Math.clamp((Math.floor(((window.innerWidth - 384) / 1280) * 10) / 10), 0.1, 1),
+  });
 
   return canvas
     .toDataURL('image/png')
