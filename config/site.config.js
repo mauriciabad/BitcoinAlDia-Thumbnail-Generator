@@ -15,7 +15,7 @@ const config = {
   site_description: 'Generador de miniaturas para el canal de YouTube Bitcoin al dia',
 
   // Your website's URL, used for sitemap
-  site_url: 'https://iniatura-bitcoinaldia.netlify.com',
+  site_url: 'https://miniatura-bitcoinaldia.mauri.app',
 
   // Google Analytics tracking ID (leave blank to disable)
   googleAnalyticsUA: '',
