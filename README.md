@@ -6,7 +6,7 @@ Use it here: <https://miniatura-bitcoinaldia.mauri.app/>
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 Once the page is built, your default browser will open on <https://localhost:8080/>

@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run dist --if-present
+        run: npm run build --if-present
 
       - name: Upload static files as artifact
         id: deployment
