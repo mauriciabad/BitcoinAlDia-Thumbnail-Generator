@@ -15,7 +15,17 @@
   "bugs": {
     "url": "https://github.com/mauriciabad/BitcoinAlDia-Thumbnail-Generator/issues"
   },
-  "scripts": {},
-  "devDependencies": {},
-  "dependencies": {}
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.85.1",
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "html2canvas": "^1.4.1",
+    "normalize.css": "^8.0.1"
+  }
 }
