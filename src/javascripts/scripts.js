@@ -3,6 +3,43 @@ import 'babel-polyfill';
 import html2canvas from 'html2canvas';
 // import templates from '../data/templates';
 
+const currentUrl = window.location.hostname;
+if (currentUrl !== 'miniatura-bitcoinaldia.mauri.app') {
+  const message = document.createElement('div');
+  message.style.position = 'fixed';
+  message.style.top = '0';
+  message.style.left = '0';
+  message.style.width = '100%';
+  message.style.height = '100%';
+  message.style.backgroundColor = 'black';
+  message.style.color = 'white';
+  message.style.display = 'flex';
+  message.style.flexDirection = 'column';
+  message.style.justifyContent = 'center';
+  message.style.alignItems = 'center';
+  message.style.gap = '2rem';
+  message.style.zIndex = '1000';
+  message.style.fontSize = '2rem';
+  message.style.whiteSpace = 'pre-wrap';
+  message.style.textAlign = 'center';
+  message.style.lineHeight = '2';
+  message.style.fontFamily = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif';
+  // message.innerText = 'The URL has changed.\nThe old one will stop working on Feb 28.';
+  message.innerText = 'La URL ha cambiado.\nLa antigua dejará de funcionar el 28 de febrero.\nPor favor, actualiza tu marcador a:';
+
+  const url = document.createElement('a');
+  url.href = 'https://miniatura-bitcoinaldia.mauri.app';
+  url.innerText = 'https://miniatura-bitcoinaldia.mauri.app';
+  url.style.color = 'white';
+  url.style.textDecoration = 'underline';
+  url.style.cursor = 'pointer';
+  url.style.color = 'cyan';
+
+  message.appendChild(url);
+
+  document.body.appendChild(message);
+}
+
 const downloadElem = document.querySelector('#download');
 const dateElem = document.querySelector('#date');
 const imageElem = document.querySelector('#image');
