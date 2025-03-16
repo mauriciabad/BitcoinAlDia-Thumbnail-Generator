@@ -72,6 +72,7 @@ const bgOffsetBasicGroupElem = document.querySelector("#bg-offset-basic-group");
 const bgOffsetAdvancedGroupElem = document.querySelector(
   "#bg-offset-advanced-group"
 );
+const colorAdvancedElem = document.querySelector("#color-advanced");
 
 let backgroundImageSize = { width: 1000, height: 600 };
 function getBackgroundImageSizeFromURL(imageUrl) {
@@ -153,6 +154,7 @@ function fillControls() {
   bgOffsetBasicElem.value = 50;
   bgOffsetAdvancedElem.checked = false;
   bgOffsetYElem.value = 0.5;
+  colorAdvancedElem.value = colorElem.value;
   bgOffsetBasicGroupElem.style.display = "block";
   bgOffsetAdvancedGroupElem.style.display = "none";
 }
@@ -244,11 +246,21 @@ colorElem.addEventListener("input", (event) => {
   const color = event.target.value;
   const isALightColor = contrast(color);
 
-  thumbnailElem.style.setProperty("--color-bg", color);
+  thumbnailElem.style.setProperty("--color-border", color);
   thumbnailElem.style.setProperty(
     "--color-text",
     isALightColor ? "#000" : "#fff"
   );
+
+  if (!bgOffsetAdvancedElem.checked) {
+    colorAdvancedElem.value = color;
+    thumbnailElem.style.setProperty("--color-bg", color);
+  }
+});
+
+colorAdvancedElem.addEventListener("input", (event) => {
+  const color = event.target.value;
+  thumbnailElem.style.setProperty("--color-bg", color);
 });
 
 textElem.addEventListener("input", (event) => {

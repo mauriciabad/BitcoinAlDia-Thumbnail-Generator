@@ -16,6 +16,7 @@
 }
 
 .thumbnail[data-theme="frame"] {
+  --color-border: #ffd866;
   --color-bg: #ffd866;
   --color-text: #000;
   --bg-position-y: 50%;
@@ -24,7 +25,7 @@
   $top-bar-height: 100px;
 
   background-color: var(--color-bg, #ffd866);
-  border: solid $border-width var(--color-bg, #ffd866);
+  border: solid $border-width var(--color-border, #ffd866);
   position: relative;
   background-image: url('../images/defaultBackground.jpg');
   background-size: cover;
@@ -35,7 +36,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    background-color: var(--color-bg, #ffd866);
+    background-color: var(--color-border, #ffd866);
     color: var(--color-text, #000);
     font-weight: bold;
     font-size: 120px * 1 / 0.8;
@@ -51,7 +52,7 @@
   }
 
   .icon {
-    background-color: var(--color-bg, #ffd866);
+    background-color: var(--color-border, #ffd866);
     padding: 0 $border-width/2 $border-width/2 0;
     position: absolute;
     left: 0;
