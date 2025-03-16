@@ -73,6 +73,7 @@ const bgModeBasicElem = document.querySelector("#bg-mode-basic");
 const bgModeAdvancedElem = document.querySelector("#bg-mode-advanced");
 const bgOffsetYElem = document.querySelector("#bg-offset-y");
 const bgOffsetXElem = document.querySelector("#bg-offset-x");
+const bgZoomElem = document.querySelector("#bg-zoom");
 const textSizeElem = document.querySelector("#text-size");
 const iconSunElem = document.querySelector("#icon-sun");
 const iconMoonElem = document.querySelector("#icon-moon");
@@ -161,15 +162,28 @@ function fillControls() {
     thumbnailElem.querySelector(".thumbnail__icon").dataset.icon = "moon";
   }
 
+  // Set initial values for controls
   textSizeElem.value = 100;
+
+  // Basic mode controls - centered position
   bgOffsetBasicYElem.value = 50;
   bgOffsetBasicXElem.value = 50;
-  bgModeBasicElem.checked = true;
+
+  // Advanced mode controls - centered position with default zoom
   bgOffsetYElem.value = 0.5;
   bgOffsetXElem.value = 0.5;
+  bgZoomElem.value = 1;
+
+  // Set the color for advanced mode
   colorAdvancedElem.value = colorElem.value;
+
+  // Start in basic mode
+  bgModeBasicElem.checked = true;
   bgOffsetBasicGroupElem.style.display = "contents";
   bgOffsetAdvancedGroupElem.style.display = "none";
+
+  // Apply the initial settings
+  updateBgOffset();
 }
 
 function readFileURL(file) {
@@ -207,7 +221,24 @@ imageElem.addEventListener("change", async (event) => {
   const file = event.target.files[0];
   const url = file ? await readFileURL(file) : DEFAULT_BACKGROUND_IMAGE;
   thumbnailElem.style.backgroundImage = `url(${url})`;
-  backgroundImageSize = await getBackgroundImageSizeFromURL(url);
+
+  try {
+    backgroundImageSize = await getBackgroundImageSizeFromURL(url);
+  } catch (error) {
+    console.error("Error getting background image size", error);
+    // Use default size if there's an error
+    backgroundImageSize = { width: 1000, height: 600 };
+  }
+
+  // Reset to center position in the current mode
+  if (bgModeAdvancedElem.checked) {
+    bgOffsetYElem.value = 0.5;
+    bgOffsetXElem.value = 0.5;
+    bgZoomElem.value = 1;
+  } else {
+    bgOffsetBasicYElem.value = 50;
+    bgOffsetBasicXElem.value = 50;
+  }
 
   updateBgOffset();
 });
@@ -229,21 +260,37 @@ dateElem.addEventListener("input", (event) => {
 const updateBgOffset = () => {
   if (bgModeAdvancedElem.checked) {
     const offsetY = Number(bgOffsetYElem.value);
-    const offsetX = 1 - Number(bgOffsetXElem.value);
-    thumbnailElem.style.setProperty(
-      "--bg-position-y",
-      `${
-        offsetY * (IMAGE_AREA_HEIGHT + backgroundImageSize.height) -
-        backgroundImageSize.height
-      }px`
-    );
-    thumbnailElem.style.setProperty(
-      "--bg-position-x",
-      `${
-        offsetX * (IMAGE_AREA_WIDTH + backgroundImageSize.width) -
-        backgroundImageSize.width
-      }px`
-    );
+    const offsetX = Number(bgOffsetXElem.value);
+    const zoom = Number(bgZoomElem.value);
+
+    // For allowing the image to move outside the container,
+    // we need to calculate position values that can move beyond the container edges
+    // offsetX/Y = 0 means left/top edge of image is at right/bottom of container (fully outside, showing empty area)
+    // offsetX/Y = 0.5 means image is centered
+    // offsetX/Y = 1 means right/bottom edge of image is at left/top of container (fully outside other direction)
+
+    // Calculate position in pixels rather than percentages
+    // This provides more precise control and allows negative values (image outside container)
+    const imageWidth = backgroundImageSize.width * zoom;
+    const imageHeight = backgroundImageSize.height * zoom;
+
+    // Calculate the range of possible positions
+    // The image should be able to move from fully outside on one side to fully outside on the other
+    // We need a larger range to ensure the image can go fully outside
+    const rangeX = IMAGE_AREA_WIDTH + imageWidth;
+    const rangeY = IMAGE_AREA_HEIGHT + imageHeight;
+
+    // Calculate position in pixels
+    // When offsetX/Y is 0, the image is fully offscreen to the right/bottom
+    // When offsetX/Y is 0.5, the image is centered
+    // When offsetX/Y is 1, the image is fully offscreen to the left/top
+    const posX = Math.round((1 - offsetX) * rangeX - imageWidth);
+    const posY = Math.round((1 - offsetY) * rangeY - imageHeight);
+
+    thumbnailElem.style.setProperty("--bg-position-x", `${posX}px`);
+    thumbnailElem.style.setProperty("--bg-position-y", `${posY}px`);
+    thumbnailElem.style.setProperty("--bg-zoom", zoom);
+    thumbnailElem.setAttribute("data-bg-mode", "advanced");
 
     bgOffsetBasicGroupElem.style.display = "none";
     bgOffsetAdvancedGroupElem.style.display = "contents";
@@ -252,18 +299,22 @@ const updateBgOffset = () => {
     const offsetX = 100 - Number(bgOffsetBasicXElem.value);
     thumbnailElem.style.setProperty("--bg-position-y", `${offsetY}%`);
     thumbnailElem.style.setProperty("--bg-position-x", `${offsetX}%`);
+    thumbnailElem.style.setProperty("--bg-zoom", 1);
+    thumbnailElem.removeAttribute("data-bg-mode");
 
     bgOffsetBasicGroupElem.style.display = "contents";
     bgOffsetAdvancedGroupElem.style.display = "none";
   }
 };
 
+// Update event listeners
 bgOffsetBasicYElem.addEventListener("input", updateBgOffset);
 bgOffsetBasicXElem.addEventListener("input", updateBgOffset);
 bgModeBasicElem.addEventListener("change", updateBgOffset);
 bgModeAdvancedElem.addEventListener("change", updateBgOffset);
 bgOffsetYElem.addEventListener("input", updateBgOffset);
 bgOffsetXElem.addEventListener("input", updateBgOffset);
+bgZoomElem.addEventListener("input", updateBgOffset);
 textSizeElem.addEventListener("input", (event) => {
   const size = event.target.value;
   thumbnailElem.style.setProperty("--text-size", `${size}px`);

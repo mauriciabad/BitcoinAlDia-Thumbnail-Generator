@@ -25,6 +25,7 @@
     --color-text: #000;
     --bg-position-y: 50%;
     --bg-position-x: 50%;
+    --bg-zoom: 1;
     --text-size: 100px;
 
     background-color: var(--color-bg, #ffd866);
@@ -34,6 +35,14 @@
     background-size: cover;
     background-position: var(--bg-position-x, 50%) var(--bg-position-y, 50%);
     background-repeat: no-repeat;
+    
+    &[data-bg-mode="advanced"] {
+      background-size: calc(var(--bg-zoom, 1) * 100%);
+      background-position: var(--bg-position-x, 0px) var(--bg-position-y, 0px);
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      overflow: visible;
+    }
   }
   
   transform: translate(-50%, -50%) scale(1);

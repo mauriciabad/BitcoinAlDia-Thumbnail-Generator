@@ -108,13 +108,13 @@
               <div class="mode-selector__option">
                 <input class="mode-selector__input" type="radio" name="bg-mode" id="bg-mode-basic" checked>
                 <label class="mode-selector__label" for="bg-mode-basic">
-                  Básico
+                  Sin huecos
                 </label>
               </div>
               <div class="mode-selector__option">
                 <input class="mode-selector__input" type="radio" name="bg-mode" id="bg-mode-advanced">
                 <label class="mode-selector__label" for="bg-mode-advanced">
-                  Avanzado
+                  Con huecos
                 </label>
               </div>
             </div>
@@ -122,23 +122,27 @@
 
           <div id="bg-offset-basic-group" style="display: contents;">
             <div class="control-field"> 
-              <label class="control-field__label" for="bg-offset-basic-y">Posición vertical</label>
+              <label class="control-field__label" for="bg-offset-basic-y">Vertical</label>
               <input class="control-field__input range-input" type="range" name="bg-offset-basic-y" id="bg-offset-basic-y" min="0" max="100" value="50">
             </div>
             <div class="control-field">
-              <label class="control-field__label" for="bg-offset-basic-x">Posición horizontal</label>
+              <label class="control-field__label" for="bg-offset-basic-x">Horizontal</label>
               <input class="control-field__input range-input" type="range" name="bg-offset-basic-x" id="bg-offset-basic-x" min="0" max="100" value="50">
             </div>
           </div>
 
           <div id="bg-offset-advanced-group" style="display: none;">
             <div class="control-field">
-              <label class="control-field__label" for="bg-offset-y">Posición vertical</label>
-              <input class="control-field__input range-input" type="range" name="bg-offset-advanced" id="bg-offset-y" min="0" max="1" value="0.5" step="0.001">
+              <label class="control-field__label" for="bg-offset-y">Vertical</label>
+              <input class="control-field__input range-input" type="range" name="bg-offset-y" id="bg-offset-y" min="0" max="1" value="0.5" step="0.01">
             </div>
             <div class="control-field">
-              <label class="control-field__label" for="bg-offset-x">Posición horizontal</label>
-              <input class="control-field__input range-input" type="range" name="bg-offset-advanced-x" id="bg-offset-x" min="0" max="1" value="0.5" step="0.001">
+              <label class="control-field__label" for="bg-offset-x">Horizontal</label>
+              <input class="control-field__input range-input" type="range" name="bg-offset-x" id="bg-offset-x" min="0" max="1" value="0.5" step="0.01">
+            </div>
+            <div class="control-field">
+              <label class="control-field__label" for="bg-zoom">Zoom</label>
+              <input class="control-field__input range-input" type="range" name="bg-zoom" id="bg-zoom" min="0.25" max="3" value="1" step="0.05">
             </div>
             <div class="control-field">
               <label class="control-field__label" for="color-advanced">Color de fondo</label>
