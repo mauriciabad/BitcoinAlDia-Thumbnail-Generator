@@ -281,10 +281,10 @@ const updateBgOffset = () => {
     const rangeY = IMAGE_AREA_HEIGHT + imageHeight;
 
     // Calculate position in pixels
-    // When offsetX/Y is 0, the image is fully offscreen to the right/bottom
+    // When offsetX/Y is 0, the image is fully offscreen to the left/bottom
     // When offsetX/Y is 0.5, the image is centered
-    // When offsetX/Y is 1, the image is fully offscreen to the left/top
-    const posX = Math.round((1 - offsetX) * rangeX - imageWidth);
+    // When offsetX/Y is 1, the image is fully offscreen to the right/top
+    const posX = Math.round(offsetX * rangeX - imageWidth);
     const posY = Math.round((1 - offsetY) * rangeY - imageHeight);
 
     thumbnailElem.style.setProperty("--bg-position-x", `${posX}px`);
@@ -296,7 +296,7 @@ const updateBgOffset = () => {
     bgOffsetAdvancedGroupElem.style.display = "contents";
   } else {
     const offsetY = Number(bgOffsetBasicYElem.value);
-    const offsetX = 100 - Number(bgOffsetBasicXElem.value);
+    const offsetX = Number(bgOffsetBasicXElem.value);
     thumbnailElem.style.setProperty("--bg-position-y", `${offsetY}%`);
     thumbnailElem.style.setProperty("--bg-position-x", `${offsetX}%`);
     thumbnailElem.style.setProperty("--bg-zoom", 1);
