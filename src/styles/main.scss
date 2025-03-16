@@ -97,7 +97,7 @@ img {
 /* Control panel */
 .controls {
   flex-grow: 1;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md);
   margin: 0;
   overflow: auto;
 }
@@ -106,16 +106,16 @@ img {
 .control-section {
   background: var(--color-section);
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 
   &__title {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-lg);
-    padding: var(--spacing-sm);
+    margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) var(--spacing-md);
+    padding: var(--spacing-xs);
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--color-text);
@@ -131,8 +131,15 @@ img {
   &__content {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
   }
+}
+
+/* Position sliders side by side */
+.slider-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
 }
 
 /* Control fields */
@@ -140,7 +147,7 @@ img {
   &__label {
     display: block;
     padding-bottom: var(--spacing-xs);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--color-text-muted);
   }
 
@@ -149,10 +156,10 @@ img {
     box-sizing: border-box;
     background: var(--color-input-bg);
     border: 1px solid var(--color-input-border);
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
     color: var(--color-text);
     line-height: 1;
-    min-height: 2.5rem;
+    min-height: 2.2rem;
     border-radius: var(--border-radius-sm);
     transition: border-color 0.2s ease;
 
@@ -165,8 +172,8 @@ img {
 
 /* Input type variants */
 .color-input {
-  height: 2.25rem;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  height: 2rem;
+  padding: var(--spacing-xs);
   cursor: pointer;
 }
 
@@ -174,11 +181,13 @@ img {
   padding: 0;
   cursor: pointer;
   box-shadow: none;
-  min-height: auto;
+  min-height: 1.5rem;
+  margin: var(--spacing-xs) 0;
 }
 
 .file-input {
   cursor: pointer;
+  min-height: 1.8rem;
 }
 
 /* Fieldset styling */
@@ -192,7 +201,7 @@ fieldset.control-field {
   overflow: hidden;
   transition: border-color 0.2s ease;
   position: relative;
-  padding-top: 2rem;
+  padding-top: 1.8rem;
   
   &:focus-within {
     border-color: var(--color-primary);
@@ -203,10 +212,10 @@ fieldset.control-field {
     top: 0;
     left: 0;
     width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
     margin: 0;
     box-sizing: border-box;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--color-text-muted);
   }
 }
@@ -214,9 +223,9 @@ fieldset.control-field {
 /* Icon selector */
 .icon-selector {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(2.75rem, 1fr));
   gap: var(--spacing-sm);
-  padding: 0 var(--spacing-md) var(--spacing-sm);
+  padding: 0 var(--spacing-sm) var(--spacing-xs);
 
   &__option {
     position: relative;
@@ -259,8 +268,8 @@ fieldset.control-field {
     justify-content: center;
     background: #111;
     border: 1px solid var(--color-input-border);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm);
     aspect-ratio: 1;
     cursor: pointer;
     user-select: none;
@@ -273,8 +282,8 @@ fieldset.control-field {
   }
 
   &__img {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     filter: brightness(0) invert(1);
     opacity: 0.9;
     transition: filter 0.2s ease;
@@ -288,10 +297,10 @@ fieldset.control-field {
 /* Icon options */
 .icon-options {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-sm);
-  padding: 0 var(--spacing-md) var(--spacing-md);
+  margin-top: var(--spacing-xs);
+  padding: 0 var(--spacing-sm) var(--spacing-sm);
 }
 
 /* Checkbox field */
@@ -336,7 +345,7 @@ fieldset.control-field {
   &__label {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
     cursor: pointer;
     user-select: none;
     padding: var(--spacing-xs);
@@ -344,8 +353,8 @@ fieldset.control-field {
 
     &::before {
       content: '';
-      min-width: 1.1rem;
-      height: 1.1rem;
+      min-width: 1rem;
+      height: 1rem;
       border: 2px solid var(--color-input-border);
       border-radius: var(--spacing-xs);
       background: var(--color-input-bg);
@@ -355,10 +364,10 @@ fieldset.control-field {
     &::after {
       content: '';
       position: absolute;
-      left: 0.7rem;
-      top: 0.55rem;
-      width: 0.3rem;
-      height: 0.55rem;
+      left: 0.65rem;
+      top: 0.5rem;
+      width: 0.25rem;
+      height: 0.5rem;
       border: solid white;
       border-width: 0 2px 2px 0;
       opacity: 0;
@@ -367,7 +376,7 @@ fieldset.control-field {
     }
 
     span {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: var(--color-text-muted);
     }
 
@@ -379,7 +388,7 @@ fieldset.control-field {
 
 /* Mode selector */
 .mode-selector {
-  margin-top: calc(-1 * var(--spacing-xs));
+  margin-top: 0;
   
   &__options {
     display: grid;
@@ -420,9 +429,9 @@ fieldset.control-field {
     justify-content: center;
     background: var(--color-input-bg);
     border: 1px solid var(--color-input-border);
-    border-radius: var(--border-radius-md);
-    padding: 0.4rem var(--spacing-sm);
-    font-size: 0.85rem;
+    border-radius: var(--border-radius-sm);
+    padding: 0.3rem var(--spacing-xs);
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     user-select: none;
