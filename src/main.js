@@ -77,6 +77,13 @@ const bgZoomElem = document.querySelector("#bg-zoom");
 const textSizeElem = document.querySelector("#text-size");
 const iconSunElem = document.querySelector("#icon-sun");
 const iconMoonElem = document.querySelector("#icon-moon");
+const headerPositionTopElem = document.querySelector("#header-position-top");
+const headerPositionBottomElem = document.querySelector(
+  "#header-position-bottom"
+);
+const textPositionTopElem = document.querySelector("#text-position-top");
+const textPositionBottomElem = document.querySelector("#text-position-bottom");
+const textPositionCenterElem = document.querySelector("#text-position-center");
 const thumbnailElem = document.querySelector(
   '.thumbnail[data-selected="true"]'
 );
@@ -184,6 +191,12 @@ function fillControls() {
 
   // Apply the initial settings
   updateBgOffset();
+
+  // Setup default positions
+  headerPositionTopElem.checked = true;
+  textPositionBottomElem.checked = true;
+  thumbnailElem.setAttribute("data-header-position", "top");
+  thumbnailElem.setAttribute("data-text-position", "bottom");
 }
 
 function readFileURL(file) {
@@ -369,6 +382,37 @@ document.querySelectorAll('input[name="icon"]').forEach((input) => {
     const selectedIcon = event.target.dataset.icon;
     thumbnailElem.querySelector(".thumbnail__icon").dataset.icon = selectedIcon;
   });
+});
+
+// Add event listeners for position controls
+headerPositionTopElem.addEventListener("change", function () {
+  if (this.checked) {
+    thumbnailElem.setAttribute("data-header-position", "top");
+  }
+});
+
+headerPositionBottomElem.addEventListener("change", function () {
+  if (this.checked) {
+    thumbnailElem.setAttribute("data-header-position", "bottom");
+  }
+});
+
+textPositionTopElem.addEventListener("change", function () {
+  if (this.checked) {
+    thumbnailElem.setAttribute("data-text-position", "top");
+  }
+});
+
+textPositionBottomElem.addEventListener("change", function () {
+  if (this.checked) {
+    thumbnailElem.setAttribute("data-text-position", "bottom");
+  }
+});
+
+textPositionCenterElem.addEventListener("change", function () {
+  if (this.checked) {
+    thumbnailElem.setAttribute("data-text-position", "center");
+  }
 });
 
 fillControls();

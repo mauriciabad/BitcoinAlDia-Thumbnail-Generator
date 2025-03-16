@@ -60,8 +60,6 @@
 
   &__date {
     position: absolute;
-    right: 0;
-    top: 0;
     background-color: var(--color-border, #ffd866);
     color: var(--color-text, #000);
     font-weight: bold;
@@ -71,6 +69,16 @@
     letter-spacing: $border-width;
     margin-right: -$border-width;
     z-index: 1;
+    
+    /* Default position - top right */
+    right: 0;
+    top: 0;
+    
+    .thumbnail[data-header-position="bottom"] & {
+      top: auto;
+      bottom: 0;
+      padding: $border-width 0 0 $border-width;
+    }
 
     .translucent {
       opacity: 0.4;
@@ -79,11 +87,19 @@
 
   &__icon {
     background-color: var(--color-border, #ffd866);
-    padding: 0 $border-width/2 $border-width/2 0;
     position: absolute;
+    z-index: 1;
+    
+    /* Default position - top left */
+    padding: 0 $border-width/2 $border-width/2 0;
     left: 0;
     top: 0;
-    z-index: 1;
+    
+    .thumbnail[data-header-position="bottom"] & {
+      padding: $border-width/2 $border-width/2 0 0;
+      top: auto;
+      bottom: 0;
+    }
 
     &.monochrome {
       .thumbnail__icon-img {
@@ -116,8 +132,6 @@
 
   &__text {
     position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
     font-size: var(--text-size, 100px);
     color: #fff;
@@ -126,5 +140,36 @@
     box-sizing: border-box;
     padding: $border-width;
     text-shadow: stroke(10px, #000);
+    
+    /* Default position - bottom */
+    bottom: 0;
+    left: 0;
+    
+    .thumbnail[data-text-position="top"] & {
+      bottom: auto;
+      top: 0;
+    }
+    
+    /* Add margin when both header and text are at top */
+    .thumbnail[data-header-position="top"][data-text-position="top"] & {
+      margin-top: 120px;
+    }
+    
+    .thumbnail[data-text-position="center"] & {
+      bottom: auto;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .thumbnail[data-header-position="top"][data-text-position="center"] & {
+      margin-top: 60px;
+    }
+    .thumbnail[data-header-position="bottom"][data-text-position="center"] & {
+      margin-top: -60px;
+    }
+    
+    /* Add margin when both header and text are at bottom */
+    .thumbnail[data-header-position="bottom"][data-text-position="bottom"] & {
+      margin-bottom: 150px;
+    }
   }
 }

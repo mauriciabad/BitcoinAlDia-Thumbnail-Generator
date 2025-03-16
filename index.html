@@ -68,6 +68,24 @@
             </div>
           </fieldset>
 
+          <div class="control-field mode-selector">
+            <label class="control-field__label">Posición</label>
+            <div class="mode-selector__options">
+              <div class="mode-selector__option">
+                <input class="mode-selector__input" type="radio" name="header-position" id="header-position-bottom">
+                <label class="mode-selector__label" for="header-position-bottom">
+                  Abajo
+                </label>
+              </div>
+              <div class="mode-selector__option">
+                <input class="mode-selector__input" type="radio" name="header-position" id="header-position-top" checked>
+                <label class="mode-selector__label" for="header-position-top">
+                  Arriba
+                </label>
+              </div>
+            </div>
+          </div>
+
           <div class="control-field">
             <label class="control-field__label" for="color">Color</label>
             <input class="control-field__input" type="color" name="color" id="color" value="#ffd866">
@@ -85,6 +103,31 @@
             <textarea class="control-field__input" name="text" id="text" autocomplete="off" rows="3"
               style="resize: vertical;"></textarea>
           </div>
+          
+          <div class="control-field mode-selector">
+            <label class="control-field__label">Posición</label>
+            <div class="mode-selector__options">
+              <div class="mode-selector__option">
+                <input class="mode-selector__input" type="radio" name="text-position" id="text-position-bottom" checked>
+                <label class="mode-selector__label" for="text-position-bottom">
+                  Abajo
+                </label>
+              </div>
+              <div class="mode-selector__option">
+                <input class="mode-selector__input" type="radio" name="text-position" id="text-position-center">
+                <label class="mode-selector__label" for="text-position-center">
+                  Centro
+                </label>
+              </div>
+              <div class="mode-selector__option">
+                <input class="mode-selector__input" type="radio" name="text-position" id="text-position-top">
+                <label class="mode-selector__label" for="text-position-top">
+                  Arriba
+                </label>
+              </div>
+            </div>
+          </div>
+          
           <div class="control-field">
             <label class="control-field__label" for="text-size">Tamaño</label>
             <input class="control-field__input range-input" type="range" name="text-size" id="text-size" min="55" max="140" value="100">
