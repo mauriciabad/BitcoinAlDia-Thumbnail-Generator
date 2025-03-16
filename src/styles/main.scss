@@ -83,6 +83,12 @@ h2 {
       padding-bottom: 0.25rem;
     }
 
+    .control__label-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .control__input {
       width: 100%;
       box-sizing: border-box;

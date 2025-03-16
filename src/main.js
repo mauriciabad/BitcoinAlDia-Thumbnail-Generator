@@ -3,6 +3,12 @@ import "normalize.css";
 import "./styles/main.scss";
 import "./styles/thumbnail-frame.scss";
 
+const DEFAULT_BACKGROUND_IMAGE = "/src/images/defaultBackground.jpg";
+const IMAGE_AREA_BORDER = 30;
+const IMAGE_AREA_HEIGHT = 720 - IMAGE_AREA_BORDER * 2;
+const IMAGE_AREA_WIDTH = 1280 - IMAGE_AREA_BORDER * 2;
+const IMAGE_AREA_ASPECT_RATIO = IMAGE_AREA_WIDTH / IMAGE_AREA_HEIGHT;
+
 const currentUrl = window.location.hostname;
 if (
   currentUrl !== "miniatura-bitcoinaldia.mauri.app" &&
@@ -53,13 +59,48 @@ const colorElem = document.querySelector("#color");
 const withColorElem = document.querySelector("#icon-with-color");
 const iconEnableElem = document.querySelector("#icon-enable");
 const iconControlsElem = document.querySelector("#icon-controls");
-const bgOffsetElem = document.querySelector("#bg-offset");
+const bgOffsetBasicElem = document.querySelector("#bg-offset-basic");
+const bgOffsetAdvancedElem = document.querySelector("#bg-offset-advanced");
+const bgOffsetYElem = document.querySelector("#bg-offset-y");
 const textSizeElem = document.querySelector("#text-size");
 const iconSunElem = document.querySelector("#icon-sun");
 const iconMoonElem = document.querySelector("#icon-moon");
 const thumbnailElem = document.querySelector(
   '.thumbnail[data-selected="true"]'
 );
+const bgOffsetBasicGroupElem = document.querySelector("#bg-offset-basic-group");
+const bgOffsetAdvancedGroupElem = document.querySelector(
+  "#bg-offset-advanced-group"
+);
+
+let backgroundImageSize = { width: 1000, height: 600 };
+function getBackgroundImageSizeFromURL(imageUrl) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = function () {
+      resolve({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+    img.onerror = reject;
+    img.src = imageUrl;
+  });
+}
+getBackgroundImageSizeFromURL(DEFAULT_BACKGROUND_IMAGE)
+  .then((size) => {
+    const aspectRatio = size.width / size.height;
+    backgroundImageSize =
+      aspectRatio > IMAGE_AREA_ASPECT_RATIO
+        ? {
+            width: IMAGE_AREA_HEIGHT * aspectRatio,
+            height: IMAGE_AREA_HEIGHT,
+          }
+        : {
+            width: IMAGE_AREA_WIDTH,
+            height: IMAGE_AREA_WIDTH / aspectRatio,
+          };
+  })
+  .catch((error) => {
+    console.error("Error getting background image size", error);
+  });
 
 function download(filename, data) {
   const element = document.createElement("a");
@@ -109,7 +150,11 @@ function fillControls() {
   }
 
   textSizeElem.value = 100;
-  bgOffsetElem.value = 50;
+  bgOffsetBasicElem.value = 50;
+  bgOffsetAdvancedElem.checked = false;
+  bgOffsetYElem.value = 0.5;
+  bgOffsetBasicGroupElem.style.display = "block";
+  bgOffsetAdvancedGroupElem.style.display = "none";
 }
 
 function readFileURL(file) {
@@ -144,8 +189,12 @@ downloadElem.addEventListener("click", async (event) => {
 });
 
 imageElem.addEventListener("change", async (event) => {
-  const url = await readFileURL(event.target.files[0]);
+  const file = event.target.files[0];
+  const url = file ? await readFileURL(file) : DEFAULT_BACKGROUND_IMAGE;
   thumbnailElem.style.backgroundImage = `url(${url})`;
+  backgroundImageSize = await getBackgroundImageSizeFromURL(url);
+
+  updateBgOffset();
 });
 
 dateElem.addEventListener("input", (event) => {
@@ -162,11 +211,30 @@ dateElem.addEventListener("input", (event) => {
   }
 });
 
-bgOffsetElem.addEventListener("input", (event) => {
-  const offset = event.target.value;
-  thumbnailElem.style.setProperty("--bg-position-y", `${100 - offset}%`);
-});
+const updateBgOffset = () => {
+  if (bgOffsetAdvancedElem.checked) {
+    const offsetY = Number(bgOffsetYElem.value);
+    thumbnailElem.style.setProperty(
+      "--bg-position-y",
+      `${
+        offsetY * (IMAGE_AREA_HEIGHT + backgroundImageSize.height) -
+        backgroundImageSize.height
+      }px`
+    );
 
+    bgOffsetBasicGroupElem.style.display = "none";
+    bgOffsetAdvancedGroupElem.style.display = "block";
+  } else {
+    const offset = bgOffsetBasicElem.value;
+    thumbnailElem.style.setProperty("--bg-position-y", `${offset}%`);
+    bgOffsetBasicGroupElem.style.display = "block";
+    bgOffsetAdvancedGroupElem.style.display = "none";
+  }
+};
+
+bgOffsetBasicElem.addEventListener("input", updateBgOffset);
+bgOffsetAdvancedElem.addEventListener("change", updateBgOffset);
+bgOffsetYElem.addEventListener("input", updateBgOffset);
 textSizeElem.addEventListener("input", (event) => {
   const size = event.target.value;
   thumbnailElem.style.setProperty("--text-size", `${size}px`);

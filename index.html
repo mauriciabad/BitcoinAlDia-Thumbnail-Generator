@@ -67,8 +67,19 @@
         <input class="control__input" type="range" name="text-size" id="text-size" min="55" max ="140" value="100" style="box-shadow: none;">
       </div>
       <div class="control">
-        <label class="control__label" for="bg-offset">Posición del fondo</label>
-        <input class="control__input" type="range" name="bg-offset" id="bg-offset" min="0" max ="100" value="50" style="box-shadow: none;">
+        <div class="control__label-group">
+          <div class="control__label">Posición del fondo</div>
+          <div class="control__checkbox">
+            <input type="checkbox" name="bg-offset-advanced" id="bg-offset-advanced">
+            <label for="bg-offset-advanced">Avanzado</label>
+          </div>
+        </div>
+        <div id="bg-offset-basic-group">
+          <input class="control__input" type="range" name="bg-offset-basic" id="bg-offset-basic" min="0" max="100" value="50" style="box-shadow: none;">
+        </div>
+        <div id="bg-offset-advanced-group" style="display: none;">
+          <input class="control__input" type="range" name="bg-offset-advanced" id="bg-offset-y" min="0" max="1" value="0.5" step="0.001" style="box-shadow: none;">
+        </div>
       </div>
     </div>
 
