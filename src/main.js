@@ -3,6 +3,15 @@ import "normalize.css";
 import "./styles/main.scss";
 import "./styles/thumbnail-frame.scss";
 
+// Prevent transitions on page load
+document.body.classList.add("preload");
+window.addEventListener("load", () => {
+  // Remove the class after a slight delay to make sure everything is ready
+  setTimeout(() => {
+    document.body.classList.remove("preload");
+  }, 100);
+});
+
 const DEFAULT_BACKGROUND_IMAGE = "/src/images/defaultBackground.jpg";
 const IMAGE_AREA_BORDER = 30;
 const IMAGE_AREA_HEIGHT = 720 - IMAGE_AREA_BORDER * 2;
@@ -58,9 +67,9 @@ const textElem = document.querySelector("#text");
 const colorElem = document.querySelector("#color");
 const withColorElem = document.querySelector("#icon-with-color");
 const iconEnableElem = document.querySelector("#icon-enable");
-const iconControlsElem = document.querySelector("#icon-controls");
 const bgOffsetBasicElem = document.querySelector("#bg-offset-basic");
-const bgOffsetAdvancedElem = document.querySelector("#bg-offset-advanced");
+const bgModeBasicElem = document.querySelector("#bg-mode-basic");
+const bgModeAdvancedElem = document.querySelector("#bg-mode-advanced");
 const bgOffsetYElem = document.querySelector("#bg-offset-y");
 const textSizeElem = document.querySelector("#text-size");
 const iconSunElem = document.querySelector("#icon-sun");
@@ -152,7 +161,7 @@ function fillControls() {
 
   textSizeElem.value = 100;
   bgOffsetBasicElem.value = 50;
-  bgOffsetAdvancedElem.checked = false;
+  bgModeBasicElem.checked = true;
   bgOffsetYElem.value = 0.5;
   colorAdvancedElem.value = colorElem.value;
   bgOffsetBasicGroupElem.style.display = "block";
@@ -214,7 +223,7 @@ dateElem.addEventListener("input", (event) => {
 });
 
 const updateBgOffset = () => {
-  if (bgOffsetAdvancedElem.checked) {
+  if (bgModeAdvancedElem.checked) {
     const offsetY = Number(bgOffsetYElem.value);
     thumbnailElem.style.setProperty(
       "--bg-position-y",
@@ -235,7 +244,8 @@ const updateBgOffset = () => {
 };
 
 bgOffsetBasicElem.addEventListener("input", updateBgOffset);
-bgOffsetAdvancedElem.addEventListener("change", updateBgOffset);
+bgModeBasicElem.addEventListener("change", updateBgOffset);
+bgModeAdvancedElem.addEventListener("change", updateBgOffset);
 bgOffsetYElem.addEventListener("input", updateBgOffset);
 textSizeElem.addEventListener("input", (event) => {
   const size = event.target.value;
@@ -252,7 +262,7 @@ colorElem.addEventListener("input", (event) => {
     isALightColor ? "#000" : "#fff"
   );
 
-  if (!bgOffsetAdvancedElem.checked) {
+  if (!bgModeAdvancedElem.checked) {
     colorAdvancedElem.value = color;
     thumbnailElem.style.setProperty("--color-bg", color);
   }
@@ -276,15 +286,11 @@ withColorElem.addEventListener("change", (event) => {
 
 iconEnableElem.addEventListener("change", (event) => {
   const isEnabled = event.target.checked;
-  console.log(isEnabled);
 
-  iconControlsElem
-    .querySelectorAll("input:not(#icon-enable)")
-    .forEach((input) => {
-      // eslint-disable-next-line no-param-reassign
-      input.disabled = !isEnabled;
-    });
-
+  document.querySelectorAll('input[name="icon"]').forEach((input) => {
+    input.disabled = !isEnabled;
+  });
+  withColorElem.disabled = !isEnabled;
   thumbnailElem.querySelector(".icon").classList.toggle("hidden", !isEnabled);
 });
 

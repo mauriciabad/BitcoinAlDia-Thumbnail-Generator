@@ -59,14 +59,16 @@
     top: 0;
     z-index: 1;
 
+    &.monochrome {
+      .icon__img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
     &__img {
       display: none;
       width: 120px + $border-width/2;
       height: 120px + $border-width/2;
-    }
-
-    &.monochrome > .icon__img {
-      color: var(--color-text, #000) !important;
     }
 
     &.hidden {
