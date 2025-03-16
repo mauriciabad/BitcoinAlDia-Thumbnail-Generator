@@ -83,10 +83,40 @@ h2 {
       padding-bottom: 0.25rem;
     }
 
-    .control__label-group {
+    .control__section-title {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #444;
+
+      span {
+        opacity: 0.9;
+      }
+
+      .control__checkbox {
+        font-weight: 400;
+        font-size: 1rem;
+      }
+    }
+
+    .control__checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.333rem;
+
+      input {
+        cursor: pointer;
+      }
+
+      label {
+        cursor: pointer;
+        user-select: none;
+      }
     }
 
     .control__input {

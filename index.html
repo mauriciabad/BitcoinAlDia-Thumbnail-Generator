@@ -1,84 +1,105 @@
 <!DOCTYPE html>
 <html lang="es-ES">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generador de Miniaturas | Bitcoin al dia</title>
-    <meta name="description" content="Generador de miniaturas para el canal de YouTube Bitcoin al dia">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de Miniaturas | Bitcoin al dia</title>
+  <meta name="description" content="Generador de miniaturas para el canal de YouTube Bitcoin al dia">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+
 <body class="grid">
   <div class="grid__controls">
     <div class="controls">
       <h2>Parámetros</h2>
-      
-      <div class="control">
-        <label class="control__label" for="date">Fecha</label>
-        <input class="control__input" type="date" name="date" id="date" autocomplete="off">
-      </div>
-      <div class="control">
-        <label class="control__label" for="image">Imagen</label>
-        <input class="control__input" type="file" name="image" id="image" accept="image/*" style="cursor: pointer;">
-      </div>
-      <div class="control">
-        <label class="control__label" for="text">Texto</label>
-        <textarea class="control__input" type="text" name="text" id="text" autocomplete="off" rows="3" style="resize: vertical;"></textarea>
-      </div>
-      <div class="control" id="icon-controls">
-        <span class="control__label">Icono</span>
 
-        <div class="control__radio">
-          <div>
-            <input type="radio" name="icon" id="icon-sun" data-icon="sun">
-            <label for="icon-sun">Sol</label>
-          </div>
-          <div>
-            <input type="radio" name="icon" id="icon-moon" data-icon="moon">
-            <label for="icon-moon">Luna</label>
-          </div>
-          <div>
-            <input type="radio" name="icon" id="icon-alert" data-icon="alert">
-            <label for="icon-alert">Alerta</label>
-          </div>
-          <div>
-            <input type="radio" name="icon" id="icon-info" data-icon="info">
-            <label for="icon-info">Info</label>
-          </div>
+      <div class="control">
+        <h3 class="control__section-title">
+          Borde
+        </h3>
+        <div class="control">
+          <label class="control__label" for="date">Fecha</label>
+          <input class="control__input" type="date" name="date" id="date" autocomplete="off">
         </div>
 
-        <div class="control__radio">
-          <div>
-            <input type="checkbox" name="icon-with-color" id="icon-with-color">
-            <label for="icon-with-color">Con color</label>
+        <div class="control" id="icon-controls">
+          <span class="control__label">Icono</span>
+
+          <div class="control__radio">
+            <div>
+              <input type="radio" name="icon" id="icon-sun" data-icon="sun">
+              <label for="icon-sun">Sol</label>
+            </div>
+            <div>
+              <input type="radio" name="icon" id="icon-moon" data-icon="moon">
+              <label for="icon-moon">Luna</label>
+            </div>
+            <div>
+              <input type="radio" name="icon" id="icon-alert" data-icon="alert">
+              <label for="icon-alert">Alerta</label>
+            </div>
+            <div>
+              <input type="radio" name="icon" id="icon-info" data-icon="info">
+              <label for="icon-info">Info</label>
+            </div>
           </div>
-          <div>
-            <input type="checkbox" name="icon-enable" id="icon-enable" checked>
-            <label for="icon-enable">Mostrar</label>
+
+          <div class="control__radio">
+            <div>
+              <input type="checkbox" name="icon-with-color" id="icon-with-color">
+              <label for="icon-with-color">Con color</label>
+            </div>
+            <div>
+              <input type="checkbox" name="icon-enable" id="icon-enable" checked>
+              <label for="icon-enable">Mostrar</label>
+            </div>
           </div>
+        </div>
+        <div class="control">
+          <label class="control__label" for="color">Color</label>
+          <input class="control__input" type="color" name="color" id="color" value="#ffd866">
+        </div>
+      </div>
+
+      <div class="control">
+        <h3 class="control__section-title">
+          Texto
+        </h3>
+
+        <div class="control">
+          <label class="control__label" for="text">Texto</label>
+          <textarea class="control__input" type="text" name="text" id="text" autocomplete="off" rows="3"
+            style="resize: vertical;"></textarea>
+        </div>
+        <div class="control">
+          <label class="control__label" for="text-size">Tamaño del texto</label>
+          <input class="control__input" type="range" name="text-size" id="text-size" min="55" max="140" value="100"
+            style="box-shadow: none;">
         </div>
       </div>
       <div class="control">
-        <label class="control__label" for="color">Color</label>
-        <input class="control__input" type="color" name="color" id="color" value="#ffd866">
-      </div>
-      <div class="control">
-        <label class="control__label" for="text-size">Tamaño del texto</label>
-        <input class="control__input" type="range" name="text-size" id="text-size" min="55" max ="140" value="100" style="box-shadow: none;">
-      </div>
-      <div class="control">
-        <div class="control__label-group">
-          <div class="control__label">Posición del fondo</div>
+        <h3 class="control__section-title">
+          <span>Fondo</span>
           <div class="control__checkbox">
             <input type="checkbox" name="bg-offset-advanced" id="bg-offset-advanced">
             <label for="bg-offset-advanced">Avanzado</label>
           </div>
+        </h3>
+        <div class="control">
+          <label class="control__label" for="image">Imagen</label>
+          <input class="control__input" type="file" name="image" id="image" accept="image/*" style="cursor: pointer;">
         </div>
         <div id="bg-offset-basic-group">
-          <input class="control__input" type="range" name="bg-offset-basic" id="bg-offset-basic" min="0" max="100" value="50" style="box-shadow: none;">
+          <label class="control__label" for="bg-offset-basic">Posición vertical</label>
+          <input class="control__input" type="range" name="bg-offset-basic" id="bg-offset-basic" min="0" max="100"
+            value="50" style="box-shadow: none;">
         </div>
         <div id="bg-offset-advanced-group" style="display: none;">
-          <input class="control__input" type="range" name="bg-offset-advanced" id="bg-offset-y" min="0" max="1" value="0.5" step="0.001" style="box-shadow: none;">
+          <label class="control__label" for="bg-offset-y">Posición vertical (avanzada)</label>
+          <input class="control__input" type="range" name="bg-offset-advanced" id="bg-offset-y" min="0" max="1"
+            value="0.5" step="0.001" style="box-shadow: none;">
           <div style="margin-top: 0.5rem;">
             <label class="control__label" for="color-advanced">Color de fondo</label>
             <input class="control__input" type="color" name="color-advanced" id="color-advanced">
@@ -94,27 +115,35 @@
     <div class="thumbnail" data-theme="frame" data-selected="true">
       <div class="icon monochrome" data-icon="sun">
         <svg class="icon__img" data-icon="sun" width="140" height="140" viewBox="0 0 140 140" fill="none">
-          <path d="M96 70C96 84.3594 84.3594 96 70 96C55.6406 96 44 84.3594 44 70C44 55.6406 55.6406 44 70 44C84.3594 44 96 55.6406 96 70Z" fill="currentColor"/>
-          <path d="M79.4441 35.9584L70 0L60.556 35.9584H79.4441Z" fill="currentColor"/>
-          <path d="M87.3931 39.251L100.749 52.6069L119.497 20.5025L87.3931 39.251Z" fill="currentColor"/>
-          <path d="M104.042 60.556L104.042 79.444L140 70L104.042 60.556Z" fill="currentColor"/>
-          <path d="M100.749 87.3931L87.3931 100.749L119.497 119.497L100.749 87.3931Z" fill="currentColor"/>
-          <path d="M79.444 104.042H60.556L70 140L79.444 104.042Z" fill="currentColor"/>
-          <path d="M52.6069 100.749L39.251 87.3931L20.5025 119.497L52.6069 100.749Z" fill="currentColor"/>
-          <path d="M35.9584 79.444V60.556L0 70L35.9584 79.444Z" fill="currentColor"/>
-          <path d="M39.251 52.6069L52.6069 39.251L20.5025 20.5025L39.251 52.6069Z" fill="currentColor"/>
+          <path
+            d="M96 70C96 84.3594 84.3594 96 70 96C55.6406 96 44 84.3594 44 70C44 55.6406 55.6406 44 70 44C84.3594 44 96 55.6406 96 70Z"
+            fill="currentColor" />
+          <path d="M79.4441 35.9584L70 0L60.556 35.9584H79.4441Z" fill="currentColor" />
+          <path d="M87.3931 39.251L100.749 52.6069L119.497 20.5025L87.3931 39.251Z" fill="currentColor" />
+          <path d="M104.042 60.556L104.042 79.444L140 70L104.042 60.556Z" fill="currentColor" />
+          <path d="M100.749 87.3931L87.3931 100.749L119.497 119.497L100.749 87.3931Z" fill="currentColor" />
+          <path d="M79.444 104.042H60.556L70 140L79.444 104.042Z" fill="currentColor" />
+          <path d="M52.6069 100.749L39.251 87.3931L20.5025 119.497L52.6069 100.749Z" fill="currentColor" />
+          <path d="M35.9584 79.444V60.556L0 70L35.9584 79.444Z" fill="currentColor" />
+          <path d="M39.251 52.6069L52.6069 39.251L20.5025 20.5025L39.251 52.6069Z" fill="currentColor" />
         </svg>
-          
+
         <svg class="icon__img" data-icon="moon" width="140" height="140" viewBox="0 0 140 140" fill="none">
-          <path d="M73.2202 129.996C96.1773 130.238 117.148 117.01 126.818 96.188C120.732 98.8433 114.141 100.144 107.503 99.9994C81.4811 99.9701 60.3937 78.8826 60.3644 52.8612C60.6249 35.2597 70.3369 19.1596 85.7842 10.7177C81.6182 10.1872 77.4197 9.94974 73.2202 10.0083C40.0856 10.0083 13.2262 36.8688 13.2262 70.0024C13.2262 103.137 40.0856 129.996 73.2202 129.996Z" fill="currentColor"/>
+          <path
+            d="M73.2202 129.996C96.1773 130.238 117.148 117.01 126.818 96.188C120.732 98.8433 114.141 100.144 107.503 99.9994C81.4811 99.9701 60.3937 78.8826 60.3644 52.8612C60.6249 35.2597 70.3369 19.1596 85.7842 10.7177C81.6182 10.1872 77.4197 9.94974 73.2202 10.0083C40.0856 10.0083 13.2262 36.8688 13.2262 70.0024C13.2262 103.137 40.0856 129.996 73.2202 129.996Z"
+            fill="currentColor" />
         </svg>
 
         <svg class="icon__img" data-icon="info" width="140" height="140" viewBox="0 0 140 140" fill="none">
-          <path d="M112.427 27.5734C101.094 16.2412 86.0266 10 70 10C53.9734 10 38.9062 16.2412 27.5734 27.5734C16.2412 38.9062 10 53.9734 10 70C10 86.0266 16.2412 101.094 27.5734 112.427C38.9062 123.759 53.9734 130 70 130C86.0266 130 101.094 123.759 112.427 112.427C123.759 101.094 130 86.0266 130 70C130 53.9734 123.759 38.9062 112.427 27.5734ZM70 33.6719C75.8155 33.6719 80.5469 38.4032 80.5469 44.2188C80.5469 50.0343 75.8155 54.7656 70 54.7656C64.1845 54.7656 59.4531 50.0343 59.4531 44.2188C59.4531 38.4032 64.1845 33.6719 70 33.6719ZM85 103.984H54.5312V96.9531H59.4531V68.8281H54.7656V61.7969H80.5469V96.9531H85V103.984Z" fill="currentColor"/>
+          <path
+            d="M112.427 27.5734C101.094 16.2412 86.0266 10 70 10C53.9734 10 38.9062 16.2412 27.5734 27.5734C16.2412 38.9062 10 53.9734 10 70C10 86.0266 16.2412 101.094 27.5734 112.427C38.9062 123.759 53.9734 130 70 130C86.0266 130 101.094 123.759 112.427 112.427C123.759 101.094 130 86.0266 130 70C130 53.9734 123.759 38.9062 112.427 27.5734ZM70 33.6719C75.8155 33.6719 80.5469 38.4032 80.5469 44.2188C80.5469 50.0343 75.8155 54.7656 70 54.7656C64.1845 54.7656 59.4531 50.0343 59.4531 44.2188C59.4531 38.4032 64.1845 33.6719 70 33.6719ZM85 103.984H54.5312V96.9531H59.4531V68.8281H54.7656V61.7969H80.5469V96.9531H85V103.984Z"
+            fill="currentColor" />
         </svg>
-          
+
         <svg class="icon__img" data-icon="alert" width="140" height="140" viewBox="0 0 140 140" fill="none">
-          <path d="M138.768 116.502L77.3456 14.6391C75.7933 12.0647 73.0062 10.4905 69.9997 10.4905C66.9933 10.4905 64.2062 12.0644 62.6538 14.6391L1.23213 116.502C-0.365296 119.152 -0.4126 122.456 1.10881 125.15C2.63021 127.844 5.48408 129.51 8.57775 129.51H131.422C134.516 129.51 137.37 127.844 138.891 125.15C140.412 122.456 140.365 119.152 138.768 116.502ZM70.0457 45.7262C73.5733 45.7262 76.5581 47.7163 76.5581 51.2436C76.5581 62.0069 75.2918 77.4742 75.2918 88.2375C75.2918 91.0416 72.2165 92.2171 70.0457 92.2171C67.1516 92.2171 64.7093 91.0413 64.7093 88.2375C64.7093 77.4742 63.4433 62.0069 63.4433 51.2436C63.4433 47.7163 66.3373 45.7262 70.0457 45.7262ZM70.1362 112.388C66.1566 112.388 63.1715 109.132 63.1715 105.423C63.1715 101.624 66.1563 98.4589 70.1362 98.4589C73.8445 98.4589 77.0104 101.624 77.0104 105.423C77.0104 109.132 73.8445 112.388 70.1362 112.388Z" fill="currentColor"/>
+          <path
+            d="M138.768 116.502L77.3456 14.6391C75.7933 12.0647 73.0062 10.4905 69.9997 10.4905C66.9933 10.4905 64.2062 12.0644 62.6538 14.6391L1.23213 116.502C-0.365296 119.152 -0.4126 122.456 1.10881 125.15C2.63021 127.844 5.48408 129.51 8.57775 129.51H131.422C134.516 129.51 137.37 127.844 138.891 125.15C140.412 122.456 140.365 119.152 138.768 116.502ZM70.0457 45.7262C73.5733 45.7262 76.5581 47.7163 76.5581 51.2436C76.5581 62.0069 75.2918 77.4742 75.2918 88.2375C75.2918 91.0416 72.2165 92.2171 70.0457 92.2171C67.1516 92.2171 64.7093 91.0413 64.7093 88.2375C64.7093 77.4742 63.4433 62.0069 63.4433 51.2436C63.4433 47.7163 66.3373 45.7262 70.0457 45.7262ZM70.1362 112.388C66.1566 112.388 63.1715 109.132 63.1715 105.423C63.1715 101.624 66.1563 98.4589 70.1362 98.4589C73.8445 98.4589 77.0104 101.624 77.0104 105.423C77.0104 109.132 73.8445 112.388 70.1362 112.388Z"
+            fill="currentColor" />
         </svg>
       </div>
       <span class="date"></span>
@@ -124,4 +153,5 @@
 
   <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
