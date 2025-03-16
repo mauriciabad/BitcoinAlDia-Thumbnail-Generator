@@ -381,12 +381,6 @@ fieldset.control-field {
 .mode-selector {
   margin-top: calc(-1 * var(--spacing-xs));
   
-  .control-field__label {
-    font-size: 0.8rem;
-    padding-bottom: 0.1rem;
-    opacity: 0.7;
-  }
-  
   &__options {
     display: grid;
     grid-template-columns: 1fr 1fr;

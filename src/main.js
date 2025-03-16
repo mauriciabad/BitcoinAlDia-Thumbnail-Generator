@@ -67,10 +67,12 @@ const textElem = document.querySelector("#text");
 const colorElem = document.querySelector("#color");
 const withColorElem = document.querySelector("#icon-with-color");
 const iconEnableElem = document.querySelector("#icon-enable");
-const bgOffsetBasicElem = document.querySelector("#bg-offset-basic");
+const bgOffsetBasicYElem = document.querySelector("#bg-offset-basic-y");
+const bgOffsetBasicXElem = document.querySelector("#bg-offset-basic-x");
 const bgModeBasicElem = document.querySelector("#bg-mode-basic");
 const bgModeAdvancedElem = document.querySelector("#bg-mode-advanced");
 const bgOffsetYElem = document.querySelector("#bg-offset-y");
+const bgOffsetXElem = document.querySelector("#bg-offset-x");
 const textSizeElem = document.querySelector("#text-size");
 const iconSunElem = document.querySelector("#icon-sun");
 const iconMoonElem = document.querySelector("#icon-moon");
@@ -160,11 +162,13 @@ function fillControls() {
   }
 
   textSizeElem.value = 100;
-  bgOffsetBasicElem.value = 50;
+  bgOffsetBasicYElem.value = 50;
+  bgOffsetBasicXElem.value = 50;
   bgModeBasicElem.checked = true;
   bgOffsetYElem.value = 0.5;
+  bgOffsetXElem.value = 0.5;
   colorAdvancedElem.value = colorElem.value;
-  bgOffsetBasicGroupElem.style.display = "block";
+  bgOffsetBasicGroupElem.style.display = "contents";
   bgOffsetAdvancedGroupElem.style.display = "none";
 }
 
@@ -225,6 +229,7 @@ dateElem.addEventListener("input", (event) => {
 const updateBgOffset = () => {
   if (bgModeAdvancedElem.checked) {
     const offsetY = Number(bgOffsetYElem.value);
+    const offsetX = 1 - Number(bgOffsetXElem.value);
     thumbnailElem.style.setProperty(
       "--bg-position-y",
       `${
@@ -232,21 +237,33 @@ const updateBgOffset = () => {
         backgroundImageSize.height
       }px`
     );
+    thumbnailElem.style.setProperty(
+      "--bg-position-x",
+      `${
+        offsetX * (IMAGE_AREA_WIDTH + backgroundImageSize.width) -
+        backgroundImageSize.width
+      }px`
+    );
 
     bgOffsetBasicGroupElem.style.display = "none";
-    bgOffsetAdvancedGroupElem.style.display = "block";
+    bgOffsetAdvancedGroupElem.style.display = "contents";
   } else {
-    const offset = bgOffsetBasicElem.value;
-    thumbnailElem.style.setProperty("--bg-position-y", `${offset}%`);
-    bgOffsetBasicGroupElem.style.display = "block";
+    const offsetY = Number(bgOffsetBasicYElem.value);
+    const offsetX = 100 - Number(bgOffsetBasicXElem.value);
+    thumbnailElem.style.setProperty("--bg-position-y", `${offsetY}%`);
+    thumbnailElem.style.setProperty("--bg-position-x", `${offsetX}%`);
+
+    bgOffsetBasicGroupElem.style.display = "contents";
     bgOffsetAdvancedGroupElem.style.display = "none";
   }
 };
 
-bgOffsetBasicElem.addEventListener("input", updateBgOffset);
+bgOffsetBasicYElem.addEventListener("input", updateBgOffset);
+bgOffsetBasicXElem.addEventListener("input", updateBgOffset);
 bgModeBasicElem.addEventListener("change", updateBgOffset);
 bgModeAdvancedElem.addEventListener("change", updateBgOffset);
 bgOffsetYElem.addEventListener("input", updateBgOffset);
+bgOffsetXElem.addEventListener("input", updateBgOffset);
 textSizeElem.addEventListener("input", (event) => {
   const size = event.target.value;
   thumbnailElem.style.setProperty("--text-size", `${size}px`);
