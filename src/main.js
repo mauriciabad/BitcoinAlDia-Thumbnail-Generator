@@ -153,10 +153,10 @@ function fillControls() {
 
   if (now.getHours() < 19) {
     iconSunElem.checked = true;
-    thumbnailElem.querySelector(".icon").dataset.icon = "sun";
+    thumbnailElem.querySelector(".thumbnail__icon").dataset.icon = "sun";
   } else {
     iconMoonElem.checked = true;
-    thumbnailElem.querySelector(".icon").dataset.icon = "moon";
+    thumbnailElem.querySelector(".thumbnail__icon").dataset.icon = "moon";
   }
 
   textSizeElem.value = 100;
@@ -218,7 +218,7 @@ dateElem.addEventListener("input", (event) => {
       /([0/])(?=\d)/g,
       '<span class="translucent">$1</span>'
     );
-    thumbnailElem.querySelector(".date").innerHTML = dateStringHTML;
+    thumbnailElem.querySelector(".thumbnail__date").innerHTML = dateStringHTML;
   }
 });
 
@@ -274,13 +274,13 @@ colorAdvancedElem.addEventListener("input", (event) => {
 });
 
 textElem.addEventListener("input", (event) => {
-  thumbnailElem.querySelector(".text").innerHTML =
+  thumbnailElem.querySelector(".thumbnail__text").innerHTML =
     event.target.value.replaceAll("\n", "<br>");
 });
 
 withColorElem.addEventListener("change", (event) => {
   thumbnailElem
-    .querySelector(".icon")
+    .querySelector(".thumbnail__icon")
     .classList.toggle("monochrome", !event.target.checked);
 });
 
@@ -291,13 +291,15 @@ iconEnableElem.addEventListener("change", (event) => {
     input.disabled = !isEnabled;
   });
   withColorElem.disabled = !isEnabled;
-  thumbnailElem.querySelector(".icon").classList.toggle("hidden", !isEnabled);
+  thumbnailElem
+    .querySelector(".thumbnail__icon")
+    .classList.toggle("hidden", !isEnabled);
 });
 
 document.querySelectorAll('input[name="icon"]').forEach((input) => {
   input.addEventListener("change", (event) => {
     const selectedIcon = event.target.dataset.icon;
-    thumbnailElem.querySelector(".icon").dataset.icon = selectedIcon;
+    thumbnailElem.querySelector(".thumbnail__icon").dataset.icon = selectedIcon;
   });
 });
 
