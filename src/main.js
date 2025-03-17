@@ -273,7 +273,7 @@ dateElem.addEventListener("input", (event) => {
 const updateBgOffset = () => {
   if (bgModeAdvancedElem.checked) {
     const offsetY = Number(bgOffsetYElem.value);
-    const offsetX = Number(bgOffsetXElem.value);
+    const offsetX = 1 - Number(bgOffsetXElem.value);
     const zoom = Number(bgZoomElem.value);
 
     // For allowing the image to move outside the container,
@@ -288,17 +288,18 @@ const updateBgOffset = () => {
     const imageHeight = backgroundImageSize.height * zoom;
 
     // Calculate the range of possible positions
-    // The image should be able to move from fully outside on one side to fully outside on the other
-    // We need a larger range to ensure the image can go fully outside
-    const rangeX = IMAGE_AREA_WIDTH + imageWidth;
-    const rangeY = IMAGE_AREA_HEIGHT + imageHeight;
+    // When offsetX/Y = 0, the image should be positioned with its left/top edge at the right/bottom of container
+    // When offsetX/Y = 1, the image should be positioned with its right/bottom edge at the left/top of container
 
-    // Calculate position in pixels
-    // When offsetX/Y is 0, the image is fully offscreen to the left/bottom
-    // When offsetX/Y is 0.5, the image is centered
-    // When offsetX/Y is 1, the image is fully offscreen to the right/top
-    const posX = Math.round(offsetX * rangeX - imageWidth);
-    const posY = Math.round((1 - offsetY) * rangeY - imageHeight);
+    // For X-axis: When offsetX = 0, posX should be IMAGE_AREA_WIDTH, when offsetX = 1, posX should be -imageWidth
+    const posX = Math.round(
+      IMAGE_AREA_WIDTH - offsetX * (IMAGE_AREA_WIDTH + imageWidth)
+    );
+
+    // For Y-axis: When offsetY = 0, posY should be IMAGE_AREA_HEIGHT, when offsetY = 1, posY should be -imageHeight
+    const posY = Math.round(
+      IMAGE_AREA_HEIGHT - offsetY * (IMAGE_AREA_HEIGHT + imageHeight)
+    );
 
     thumbnailElem.style.setProperty("--bg-position-x", `${posX}px`);
     thumbnailElem.style.setProperty("--bg-position-y", `${posY}px`);
